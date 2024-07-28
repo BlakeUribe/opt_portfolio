@@ -1,0 +1,12 @@
+Symbol,Name,Quantity,Avg. Price,Cost Basis,Unrealized Gain ($),Unrealized Gain (%),Value,Weight (%),Beta (5Y Monthly),Avg. Returns (%) (5Y Monthly)
+VOO,Vanguard S&P 500 ETF,17.94,413.51,7419.13,1557.68,21.0,8976.81,32.28,1.0,1.34
+HDV,iShares Core High Dividend ETF,53.55,97.62,5227.94,876.55,16.77,6104.49,21.95,0.82,0.81
+VDC,Vanguard Consumer Staples ETF,19.13,187.85,3593.0,390.88,10.88,3983.88,14.33,0.61,0.8
+XLK,Technology Select Sector SPDR Fund,12.38,188.01,2327.28,349.99,15.04,2677.27,9.63,1.13,2.0
+XLE,Energy Select Sector SPDR Fund,21.7,82.26,1785.22,215.47,12.07,2000.69,7.19,1.24,1.83
+SOXX,iShares PHLX Semiconductor ETF,4.95,174.31,862.24,272.33,31.58,1134.57,4.08,1.32,2.53
+TMF,Direxion Daily 20+ Year Treasury Bull 3X Shares,14.89,51.31,764.01,-16.97,-2.22,747.04,2.69,0.83,-2.17
+MSFT,Microsoft,1.6,382.16,610.36,68.85,11.28,679.21,2.44,0.87,2.21
+COST,Costco Wholesale Corp.,0.77,529.48,407.5,221.75,54.42,629.25,2.26,0.77,2.1
+XOM,Exxon Mobil Corp.,4.28,90.71,388.3,113.97,29.35,502.27,1.81,0.85,1.81
+WM,"Waste Management, Inc.",1.89,164.3,310.72,61.76,19.88,372.48,1.34,0.74,1.17
