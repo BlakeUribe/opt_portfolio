@@ -63,3 +63,55 @@ def analyze_stocks(symbols: str, start_date: datetime, end_date: datetime, freq:
     combined_df = pd.concat(all_summaries, ignore_index=True)
     return combined_df
 # print('run')
+
+class StockRatios:
+    def __init__(self, symbols: pd.Series):
+        self.symbols = symbols
+        self.etf_list = self.get_etfs(symbols)
+        self.stocks = self.get_stocks(symbols, self.etf_list)
+        self.ratios = pd.DataFrame()  # Initialize an empty DataFrame to store ratios
+
+    def get_etfs(self, symbols):
+        etf_list = [] 
+        for stock in symbols:
+            try:
+                ticker = yf.Ticker(stock)
+                income_statement = ticker.quarterly_financials.iloc[:, [0]]
+            except (IndexError, KeyError):
+                etf_list.append(stock)
+        return etf_list
+    
+    def get_stocks(self, symbols, etf_list):
+        return [i for i in symbols if i not in etf_list]
+    
+    def compute_gross_profit_margin(self):
+        results = []
+        for stock in self.stocks:
+            try:
+                ticker = yf.Ticker(stock)
+                income_statement = ticker.quarterly_financials.iloc[:, [0]]
+                date = income_statement.columns[0]
+                gross_profit_margin = ((income_statement.loc['Gross Profit'] / income_statement.loc['Total Revenue']) * 100).values[0]
+                results.append({
+                    'Symbol': ticker.ticker,
+                    'Date': date,
+                    'Gross_Profit_Margin': gross_profit_margin
+                })
+            except (IndexError, KeyError):
+                continue
+        return results
+
+    def get_ratio_df(self):
+        # Aggregate all ratios into a single list of results
+        all_results = []
+        all_results.extend(self.compute_gross_profit_margin())
+        
+        # Convert list of results to a DataFrame
+        ratio_df = pd.DataFrame(all_results)
+        
+        # Set 'Date' as the index
+        if 'Date' in ratio_df.columns:
+            ratio_df.set_index('Date', inplace=True)
+        
+        self.ratios = ratio_df
+        return self.ratios
