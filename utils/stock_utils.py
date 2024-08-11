@@ -41,10 +41,20 @@ class StockAnalysis:
         # Calculates stock standard deviation
         return np.sqrt(np.var(self.stock_df['Returns(%)']))
 
+    def get_sector(self):
+        info = yf.Ticker(self.symbol).info
+        # Use .get() to access 'sector' key and provide a default value if missing
+        try:
+            sector = info['sector']  # Default to 'Unknown' if key is not present
+        except KeyError:
+            sector = info['category']
+        return sector
+
     def get_analysis_summary(self) -> pd.DataFrame:
         # Compiles analysis results into a DataFrame
         summary = {
             'Symbol': [self.symbol],
+            'Sector': [self.get_sector()],
             'Average_Return(%)': [self.calculate_average_return()],
             'Beta': [self.get_stock_beta()],
             'Standard_Deviation(%)': [self.get_stock_std()],
